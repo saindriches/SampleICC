@@ -6,14 +6,14 @@
 
     Version:    V1
 
-    Copyright:  © see ICC Software License
+    Copyright:  ï¿½ see ICC Software License
 */
 
 /*
  * The ICC Software License, Version 0.2
  *
  *
- * Copyright (c) 2005 The International Color Consortium. All rights 
+ * Copyright (c) 2005-2015 The International Color Consortium. All rights 
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without

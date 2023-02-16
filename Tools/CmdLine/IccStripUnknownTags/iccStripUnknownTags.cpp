@@ -5,14 +5,14 @@ Contains:   Console app to parse and remove unknown tag elements
 
 Version:    V1
 
-Copyright:  © see below
+Copyright:  ï¿½ see below
 */
 
 /*
 * The ICC Software License, Version 0.2
 *
 *
-* Copyright (c) 2003-2010 The International Color Consortium. All rights 
+* Copyright (c) 2003-2015 The International Color Consortium. All rights 
 * reserved.
 *
 * Redistribution and use in source and binary forms, with or without

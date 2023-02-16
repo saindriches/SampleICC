@@ -12,7 +12,7 @@
  * The ICC Software License, Version 0.2
  *
  *
- * Copyright (c) 2003-2010 The International Color Consortium. All rights 
+ * Copyright (c) 2003-2015 The International Color Consortium. All rights 
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -130,6 +130,18 @@ icValidateStatus icMaxStatus(icValidateStatus s1, icValidateStatus s2)
     return s1;
   return s2;
 }
+
+static icInt32Number icHexDigit(icChar digit)
+{
+  if (digit>='0' && digit<='9')
+    return digit-'0';
+  if (digit>='A' && digit<='F')
+    return digit-'A'+10;
+/*  if (digit>='a' && digit<='f')
+    return digit-'a'+10;*/
+  return -1;
+}
+
 
 bool icIsSpaceCLR(icColorSpaceSignature sig) 
 {
@@ -896,6 +908,15 @@ icUInt32Number icGetSpaceSamples(icColorSpaceSignature sig)
 
   case icSigNamedData:
   default:
+    {
+      //check for non-ICC compliant 'MCHx' case provided by littlecms
+      if ((sig&0xffffff00)==0x4d434800) {
+        int d0=icHexDigit(sig&0xff);
+        if (d0>0)
+          return d0;
+      }
+
+    }
     return 0;
   }
 }
@@ -1896,7 +1917,7 @@ void CIccUTF16String::FromWString(const std::wstring &buf)
 {
 #ifdef ICC_WCHAR_32BIT
   size_t sizeSrc = buf.size();
-  const wchar_t *szStr = buf.c_str();
+  wchar_t *szStr = buf.c_str();
 
   if (sizeSrc) {
     size_t nAlloc = AllocSize(sizeSrc*2);
@@ -1950,13 +1971,9 @@ const wchar_t *CIccUTF16String::ToWString(std::wstring &buf) const
     buf += (wchar_t)0x20;
   }
   icUInt16Number *srcStr = m_str;
-  UTF32 *tmp = (UTF32*)malloc(sizeof(UTF32) * buf.size());
+  UTF32 *dstStr = buf.c_str();
 
-  if(tmp)
-  icConvertUTF16toUTF32((const UTF16**)&srcStr, &srcStr[m_len], &tmp, &tmp[buf.size()], lenientConversion);
-  buf = (wchar_t*)tmp;
-
-  if(tmp) free(tmp); tmp = NULL;
+  icConvertUTF16toUTF32((UTF16**)&srcStr, &strStr[m_len], &dstStr, &dstStr[buf.size()], lenientConversion);
 #else
   size_t i;
 

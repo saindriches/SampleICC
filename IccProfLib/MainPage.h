@@ -59,6 +59,25 @@
  *   the configuration parameters in IccProfLibConf.h. 
  *
  *  <b>VERSION HISTORY</b>
+ * - December 2015 - 1.6.10 release
+ *  - 1.6.11 release
+ *  - Fixed bug in validation of GamutTags
+ *
+ * - December 2015 - 1.6.10 release based on submission by Vitaly Bondar
+ *  - 1.6.10 release
+ *  - Fixed bug in copy data of copy constructors and copy operations of CIccTagUnkown, 
+ *    CIccTagNamedColor2, CIccTagChromaticity, CIccTagFixedNum, CIccTagNum, CIccTagData,
+ *    and CIccTagColorantOrder
+ *
+ * - Sept 2015 - 1.6.9 release
+ *  - 1.6.9 release
+ *  - Added check to black point compensation to check for negative values going into square
+ *    root calculation
+ *  - Fixed bug in copying data in constructor and copy operator of CIccTagFixedNum
+ *  - Updated copyright dates
+ *  - Added use of WXVER environment variable to select wxWidgets library version for build 
+ *    of wxProfileDump
+ *
  * - April 2014 - 1.6.8 release
  *   - 1.6.8 release
  *   - Modified CIccTagParametricCurve to use icFloatNumber rather than icS15Fixed16Number
@@ -386,7 +405,7 @@
  *
  * <b>The ICC Software License, Version 0.2</b>
  *
- * Copyright � 2003-2007 The International Color Consortium. All rights 
+ * Copyright � 2003-2015 The International Color Consortium. All rights 
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without

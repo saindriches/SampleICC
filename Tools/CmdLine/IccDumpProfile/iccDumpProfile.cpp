@@ -5,14 +5,14 @@
 
     Version:    V1
 
-    Copyright:  © see below
+    Copyright:  ï¿½ see below
 */
 
 /*
  * The ICC Software License, Version 0.2
  *
  *
- * Copyright (c) 2003-2010 The International Color Consortium. All rights 
+ * Copyright (c) 2003-2015 The International Color Consortium. All rights 
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -104,7 +104,7 @@ int main(int argc, char* argv[])
 
   if (argc<=1) {
 print_usage:
-    printf("Usage: iccDumpProfile profile {tagId to dump/\"ALL\")\n");
+    printf("Usage: iccDumpProfile [-v] profile [tagId to dump/\"ALL\"]\n");
     return -1;
   }
 
@@ -120,6 +120,9 @@ print_usage:
 
     pIcc = ValidateIccProfile(argv[nArg], sReport, nStatus);
   }
+  else
+  if (strncmp(argv[1], "-h", 2) == 0)
+    goto print_usage;
   else
     pIcc = OpenIccProfile(argv[nArg]);
 

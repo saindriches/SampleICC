@@ -12,7 +12,7 @@
  * The ICC Software License, Version 0.2
  *
  *
- * Copyright (c) 2003-2010 The International Color Consortium. All rights 
+ * Copyright (c) 2003-2015 The International Color Consortium. All rights 
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -993,7 +993,7 @@ bool CIccTagParametricCurve::IsIdentity()
 
 /**
 ****************************************************************************
-* Name: CIccTagParametricCurve::DoApply
+* Name: CIccTagParametricCurve::Apply
 * 
 * Purpose: Applies the curve to the value passed.
 * 
@@ -3156,7 +3156,7 @@ icValidateStatus CIccMBB::Validate(icTagSignature sig, std::string &sReport, con
     }
   case icSigGamutTag:
     {
-      nInput = 1;
+      nInput = icGetSpaceSamples(pProfile->m_Header.pcs);
       if (m_nInput!=nInput) {
         sReport += icValidateCriticalErrorMsg;
         sReport += sSigName;
@@ -3164,7 +3164,7 @@ icValidateStatus CIccMBB::Validate(icTagSignature sig, std::string &sReport, con
         rv = icMaxStatus(rv, icValidateCriticalError);
       }
 
-      nOutput = icGetSpaceSamples(pProfile->m_Header.colorSpace);
+      nOutput = 1;
       if (m_nOutput!=nOutput) {
         sReport += icValidateCriticalErrorMsg;
         sReport += sSigName;
