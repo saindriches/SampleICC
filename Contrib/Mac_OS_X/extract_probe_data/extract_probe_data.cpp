@@ -16,7 +16,7 @@
  
   Version:    V1
  
-  Copyright:  © see below
+  Copyright:  ï¿½ see below
 */
 
 /*
@@ -100,26 +100,9 @@ getTheDisplayColorSpace()
   static CGColorSpaceRef displayCS = NULL;
   if (displayCS == NULL)
   {
-    CMProfileRef displayProfile = NULL;
     // Get the display ID of the main display.
-    
-    // For displays other than the main display, use
-    // the functions CGGetDisplaysWithPoint,
-    // CGGetDisplaysWithRect, etc. in CGDirectDisplay.h
     CGDirectDisplayID displayID = CGMainDisplayID();
-    // The CGDirectDisplayID is the same as the CMDisplayIDType
-    // passed to CMGetProfileByAVID
-    CMError err = CMGetProfileByAVID((CMDisplayIDType)displayID,
-                                     &displayProfile);
-    if (err || displayProfile == NULL)
-    {
-      fprintf(stderr, "Got error %d when getting profile for main display!\n",
-              static_cast<int>(err));
-      return NULL;
-    }
-    
-    displayCS = CGColorSpaceCreateWithPlatformColorSpace(displayProfile);
-    CMCloseProfile(displayProfile);
+    displayCS = CGDisplayCopyColorSpace(displayID);
   }
   return displayCS;
 }
